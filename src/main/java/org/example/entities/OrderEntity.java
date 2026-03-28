@@ -1,7 +1,6 @@
 package org.example.entities;
 
 import jakarta.persistence.*;
-import org.example.enums.SedeType;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,8 +17,14 @@ public class OrderEntity {
     @OneToMany(mappedBy = "order")
     private List<OrderEntity> items;
     private LocalDateTime createdAt;
-    @Enumerated(EnumType.STRING)
-    private SedeType name;
+
+    public OrderEntity(Long id, String modalidad, UserEntity user, List<OrderEntity> items, LocalDateTime createdAt) {
+        this.id = id;
+        this.modalidad = modalidad;
+        this.user = user;
+        this.items = items;
+        this.createdAt = createdAt;
+    }
 
     public Long getId() {
         return id;
@@ -43,14 +48,6 @@ public class OrderEntity {
 
     public void setUser(UserEntity user) {
         this.user = user;
-    }
-
-    public ProductEntity getProduct() {
-        return product;
-    }
-
-    public void setProduct(ProductEntity product) {
-        this.product = product;
     }
 
     public LocalDateTime getCreatedAt() {
