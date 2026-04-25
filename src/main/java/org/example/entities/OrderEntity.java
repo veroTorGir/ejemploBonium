@@ -14,14 +14,33 @@ public class OrderEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private ProductEntity product;
+    @ManyToOne
+    @JoinColumn(name = "parent_order_id")
+    private OrderEntity order;
     @OneToMany(mappedBy = "order")
     private List<OrderEntity> items;
     private LocalDateTime createdAt;
+
+    public OrderEntity() {
+    }
 
     public OrderEntity(Long id, String modalidad, UserEntity user, List<OrderEntity> items, LocalDateTime createdAt) {
         this.id = id;
         this.modalidad = modalidad;
         this.user = user;
+        this.items = items;
+        this.createdAt = createdAt;
+    }
+
+    public OrderEntity(Long id, String modalidad, UserEntity user, ProductEntity product, OrderEntity order, List<OrderEntity> items, LocalDateTime createdAt) {
+        this.id = id;
+        this.modalidad = modalidad;
+        this.user = user;
+        this.product = product;
+        this.order = order;
         this.items = items;
         this.createdAt = createdAt;
     }
@@ -48,6 +67,30 @@ public class OrderEntity {
 
     public void setUser(UserEntity user) {
         this.user = user;
+    }
+
+    public ProductEntity getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductEntity product) {
+        this.product = product;
+    }
+
+    public OrderEntity getOrder() {
+        return order;
+    }
+
+    public void setOrder(OrderEntity order) {
+        this.order = order;
+    }
+
+    public List<OrderEntity> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OrderEntity> items) {
+        this.items = items;
     }
 
     public LocalDateTime getCreatedAt() {
