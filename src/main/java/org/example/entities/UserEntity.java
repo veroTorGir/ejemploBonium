@@ -5,18 +5,27 @@ import org.example.enums.RoleType;
 import java.util.List;
 
 @Entity
-public class UserEntity<RoleEntity> {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private  String name;
+    private String username;
+    private String name;
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
     private RoleType role;
     @OneToMany(mappedBy = "user")
     private List<OrderEntity> orders;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getName() {
         return name;
@@ -48,6 +57,14 @@ public class UserEntity<RoleEntity> {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public RoleType getRole() {
+        return role;
+    }
+
+    public void setRole(RoleType role) {
+        this.role = role;
     }
 
 }

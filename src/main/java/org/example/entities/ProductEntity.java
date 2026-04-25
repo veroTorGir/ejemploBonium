@@ -1,5 +1,7 @@
 package org.example.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -13,7 +15,10 @@ public class ProductEntity {
     private String description;
     private float precio;
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<OrderEntity> items;
+
+    public ProductEntity() {}
 
     public ProductEntity(Long id, String name, float precio, String description, List<OrderEntity> items, boolean plato) {
         this.id = id;
@@ -52,6 +57,7 @@ public class ProductEntity {
         this.description = description;
     }
 
+    @JsonProperty("price")
     public float getPrecio() {
         return precio;
     }
@@ -60,11 +66,16 @@ public class ProductEntity {
         this.precio = precio;
     }
 
+    @JsonIgnore
     public boolean isPlato() {
         return plato;
     }
 
     public void setPlato(boolean plato) {
         this.plato = plato;
+    }
+
+    public String getType() {
+        return plato ? "plato" : "adicional";
     }
 }
