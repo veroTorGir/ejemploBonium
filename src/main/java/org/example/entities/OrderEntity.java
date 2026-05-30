@@ -23,6 +23,14 @@ public class OrderEntity {
     @OneToMany(mappedBy = "order")
     private List<OrderEntity> items;
     private LocalDateTime createdAt;
+    private String estado; // pendiente, entregado
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     public OrderEntity() {
     }

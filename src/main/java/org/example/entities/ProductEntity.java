@@ -14,9 +14,22 @@ public class ProductEntity {
     private String name;
     private String description;
     private float precio;
+
     @OneToMany(mappedBy = "product")
     @JsonIgnore
     private List<OrderEntity> items;
+
+    // Relación con restaurante
+    @ManyToOne
+    @JoinColumn(name = "restaurante_id")
+    private UserEntity restaurante;
+    public UserEntity getRestaurante() {
+        return restaurante;
+    }
+
+    public void setRestaurante(UserEntity restaurante) {
+        this.restaurante = restaurante;
+    }
 
     public ProductEntity() {}
 
